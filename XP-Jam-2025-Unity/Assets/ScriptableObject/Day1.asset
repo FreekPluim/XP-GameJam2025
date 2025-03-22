@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb1ccd07ca6b5cc4e8b7fb68cf01739e, type: 3}
+  m_Name: Day1
+  m_EditorClassIdentifier: 
+  dialogue:
+  - "Hello, and welcome to your first day of work.  \n\nYour job is simple. Complete
+    the tasks withing the time limit."
+  - "Currently you have 2 tasks. Complete them when the light below turns on. \n\n1.
+    Lever - Flip the lever.\n2. Button - Press the button."
+  - "Simple Right!\nGoodluck.\n\nAnd Remember:\nIf you need help, \nYou can always
+    call 6"
