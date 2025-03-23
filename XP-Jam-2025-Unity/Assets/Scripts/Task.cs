@@ -9,32 +9,36 @@ public class Task : MonoBehaviour
     public bool Test;
 
     [HideInInspector] public UnityEvent onActivateTask;
+    [HideInInspector] public UnityEvent onDecreaseTime;
     [HideInInspector] public UnityEvent onIncreaseTime;
-    [HideInInspector] public UnityEvent onTaskCompleted;
-    [HideInInspector] public UnityEvent onTaskFailed;
+    [HideInInspector] public UnityEvent<Task> onTaskCompleted;
+    [HideInInspector] public UnityEvent<Task> onTaskFailed;
 
     [Header("Refferences")]
     public LightHandler light;
     public TextMeshProUGUI timer;
 
     [Header("Variables")]
+
     public int timerIncreaseAmount = 1;
+
     public int maxTime = 5;
+    public int currentMaxTime;
     protected int currentTime = 5;
     protected Coroutine timerCoroutine;
 
     protected bool locked = true;
     public bool interacted = false;
 
-
-
     public virtual void Start()
     {
+        ResetTime();
         light.TurnOff();
 
         onActivateTask.AddListener(OnActivateTask);
         onIncreaseTime.AddListener(OnIncreaseTimer);
         onTaskCompleted.AddListener(OnTaskCompleted);
+        onDecreaseTime.AddListener(OnDecreaseTimer);
         onTaskFailed.AddListener(OnTaskFailed);
     }
 
@@ -44,6 +48,12 @@ public class Task : MonoBehaviour
         {
             onActivateTask.Invoke();
         }
+
+        if (interacted && Input.GetMouseButtonUp(0))
+        {
+            interacted = false;
+        }
+
 
         if (locked) return;
     }
@@ -56,37 +66,49 @@ public class Task : MonoBehaviour
         light.TurnOn();
 
         //Set Timer
-        currentTime = maxTime;
+        currentTime = currentMaxTime;
         timer.text = currentTime.ToString();
-        timerCoroutine = StartCoroutine(StartTimer());
+        this.timerCoroutine = StartCoroutine(this.StartTimer());
     }
-    protected virtual void OnTaskCompleted()
+    protected virtual void OnTaskCompleted(Task task)
     {
+        AudioManager.instance.PlayOneShot("Completed");
         locked = true;
         interacted = false;
         light.TurnOff();
         if (timerCoroutine != null) StopCoroutine(timerCoroutine);
         timer.text = "";
     }
-    protected virtual void OnTaskFailed()
+    protected virtual void OnTaskFailed(Task task)
     {
+        AudioManager.instance.PlayOneShot("Mistake");
+
         locked = true;
 
         //Turn Light On
         light.TurnOff();
 
         //Set Timer
-        currentTime = maxTime;
+        currentTime = currentMaxTime;
         timer.text = "";
     }
     protected virtual void OnIncreaseTimer()
     {
-        maxTime += timerIncreaseAmount;
+        currentMaxTime += timerIncreaseAmount;
+    }
+    protected virtual void OnDecreaseTimer()
+    {
+        currentMaxTime -= 1;
+    }
+
+    public void ResetTime()
+    {
+        currentMaxTime = maxTime;
     }
 
     protected IEnumerator StartTimer()
     {
-        for (int i = 0; i < maxTime; i++)
+        for (int i = 0; i < currentMaxTime; i++)
         {
             yield return new WaitForSeconds(1);
             currentTime--;
@@ -94,6 +116,6 @@ public class Task : MonoBehaviour
             timer.text = currentTime.ToString();
         }
 
-        if (currentTime <= 0) onTaskFailed.Invoke();
+        if (currentTime <= 0) this.onTaskFailed?.Invoke(this);
     }
 }

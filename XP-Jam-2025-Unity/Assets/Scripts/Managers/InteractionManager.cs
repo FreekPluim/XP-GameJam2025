@@ -23,7 +23,7 @@ public class InteractionManager : MonoBehaviour
                 if (task != null)
                 {
                     task.interacted = true;
-                    Debug.Log("Interacted");
+                    return;
                 }
             }
         }

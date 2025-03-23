@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb1ccd07ca6b5cc4e8b7fb68cf01739e, type: 3}
+  m_Name: Call3
+  m_EditorClassIdentifier: 
+  dialogue:
+  - 'Thank you for calling 6!
+
+    The time you have to complete a task has increased.
+
+
+    Note:
+    Your next call will have a BIG price.
+
+
+    Payment: Right Eye'

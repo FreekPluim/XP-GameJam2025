@@ -10,30 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eb1ccd07ca6b5cc4e8b7fb68cf01739e, type: 3}
-  m_Name: Day3
+  m_Name: BadDay
   m_EditorClassIdentifier: 
   dialogue:
-  - 'Welcome back and good job on your second day.
+  - 'That is not how we do things here.
 
 
-    Because of how well you
-    did, we added two more tasks.'
-  - 'When the light on the task turns on
+    Make sure it doesn''t happen again!
 
 
-    1: ... - ...
+    And
+    Remember:
 
-    2. ... - ...
-
-'
-  - 'Simple Right!
-
-    Goodluck
-
-
-    And Remember:
-
-    If you need help,
-
-    You
-    can always call 6'
+    If you need help, you can always call 6.'

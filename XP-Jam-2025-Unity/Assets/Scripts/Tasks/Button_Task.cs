@@ -6,7 +6,9 @@ public class Button_Task : Task
 
         if (!locked && interacted)
         {
-            onTaskCompleted.Invoke();
+            AudioManager.instance.PlayOneShot("Click");
+            onTaskCompleted.Invoke(this);
+
         }
     }
 }

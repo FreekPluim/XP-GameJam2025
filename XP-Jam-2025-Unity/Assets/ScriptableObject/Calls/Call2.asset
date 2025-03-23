@@ -10,18 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eb1ccd07ca6b5cc4e8b7fb68cf01739e, type: 3}
-  m_Name: Filler
+  m_Name: Call2
   m_EditorClassIdentifier: 
   dialogue:
-  - 'Goodluck today!
+  - 'Thank you for calling 6!
+
+    The time you have to complete a task has increased.
 
 
-    Goodluck
+    Note:
+    Your next call will have a bigger price.
 
 
-    And Remember:
-
-    If you need help,
-
-    You
-    can always call 6'
+    Payment: Left Ear'

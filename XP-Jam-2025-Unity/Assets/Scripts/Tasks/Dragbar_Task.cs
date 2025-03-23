@@ -9,8 +9,7 @@ public class Dragbar_Task : Task
     int selectedDial = 0;
     int chosenDial;
     [SerializeField] List<TextMeshProUGUI> spaces = new List<TextMeshProUGUI>();
-    [SerializeField] float movementModifier = 0.5f;
-    bool moved;
+    bool moved = false;
 
     Camera cam;
 
@@ -34,6 +33,47 @@ public class Dragbar_Task : Task
         spaces[chosenDial].color = Color.red;
     }
 
+    protected override void OnTaskCompleted(Task task)
+    {
+        base.OnTaskCompleted(task);
+
+        switch (chosenDial)
+        {
+            case 0:
+                selectedDial = 0;
+                dial.transform.localPosition = new Vector3(-0.4f, dial.transform.localPosition.y, dial.transform.localPosition.z);
+
+                break;
+            case 1:
+                selectedDial = 1;
+                dial.transform.localPosition = new Vector3(-0.2f, dial.transform.localPosition.y, dial.transform.localPosition.z);
+
+                break;
+            case 2:
+                selectedDial = 2;
+                dial.transform.localPosition = new Vector3(0f, dial.transform.localPosition.y, dial.transform.localPosition.z);
+
+                break;
+            case 3:
+                selectedDial = 3;
+                dial.transform.localPosition = new Vector3(0.2f, dial.transform.localPosition.y, dial.transform.localPosition.z);
+
+                break;
+            case 4:
+                selectedDial = 4;
+                dial.transform.localPosition = new Vector3(0.4f, dial.transform.localPosition.y, dial.transform.localPosition.z);
+                break;
+
+        }
+        spaces[chosenDial].color = Color.white;
+    }
+
+    protected override void OnTaskFailed(Task task)
+    {
+        base.OnTaskFailed(task);
+        spaces[chosenDial].color = Color.white;
+    }
+
     RaycastHit hit;
     public override void Update()
     {
@@ -55,6 +95,7 @@ public class Dragbar_Task : Task
 
         if (!Input.GetMouseButton(0) && moved)
         {
+            AudioManager.instance.PlayOneShot("Dial");
             float xPos = Mathf.Round(dial.transform.localPosition.x * 5) / 5;
             dial.transform.localPosition = new Vector3(Mathf.Clamp(xPos, -0.4f, 0.4f), dial.transform.localPosition.y, dial.transform.localPosition.z);
             moved = false;
@@ -82,7 +123,7 @@ public class Dragbar_Task : Task
             if (selectedDial == chosenDial)
             {
                 spaces[chosenDial].color = Color.white;
-                onTaskCompleted.Invoke();
+                onTaskCompleted.Invoke(this);
             }
 
         }

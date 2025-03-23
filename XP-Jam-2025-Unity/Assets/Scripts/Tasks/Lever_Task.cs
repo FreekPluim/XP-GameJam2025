@@ -36,8 +36,7 @@ public class Lever_Task : Task
                         LeverPivot.transform.rotation = Quaternion.Euler(angle - 0.1f, 0, 0);
                         if (!up)
                         {
-                            onTaskCompleted?.Invoke();
-                            up = !up;
+                            onTaskCompleted?.Invoke(this);
                         }
 
                     }
@@ -47,8 +46,7 @@ public class Lever_Task : Task
                         LeverPivot.transform.rotation = Quaternion.Euler(-angle + 0.1f, 0, 0);
                         if (up)
                         {
-                            onTaskCompleted?.Invoke();
-                            up = !up;
+                            onTaskCompleted?.Invoke(this);
                         }
                     }
                 }
@@ -60,5 +58,20 @@ public class Lever_Task : Task
         }
     }
 
+    protected override void OnTaskCompleted(Task task)
+    {
+        AudioManager.instance.PlayOneShot("Lever");
+        base.OnTaskCompleted(task);
 
+        if (up)
+        {
+            LeverPivot.transform.rotation = Quaternion.Euler(-angle + 0.1f, 0, 0);
+        }
+        else
+        {
+            LeverPivot.transform.rotation = Quaternion.Euler(angle - 0.1f, 0, 0);
+        }
+        up = !up;
+
+    }
 }

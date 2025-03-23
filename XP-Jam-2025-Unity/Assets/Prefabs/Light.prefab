@@ -205,4 +205,4 @@ MonoBehaviour:
   lightObject: {fileID: 4507361328860923966}
   lightMaterial: {fileID: 2100000, guid: 8bf15066942eb764799032022921a4d4, type: 2}
   lightOff: {r: 0.24528301, g: 0.24528301, b: 0.24528301, a: 0}
-  lightOn: {r: 1, g: 0, b: 0, a: 0}
+  lightOn: {r: 0.08926833, g: 1, b: 0, a: 0}

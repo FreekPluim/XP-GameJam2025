@@ -29,6 +29,7 @@ public class NumPad_Task : Task
             RaycastHit hit;
             if (Physics.Raycast(cam.ScreenPointToRay(Input.mousePosition), out hit))
             {
+                AudioManager.instance.PlayOneShot("Click");
                 inputNumber = numbers.IndexOf(hit.transform.gameObject) + 1;
 
                 if (inputNumber == chosenRandomNumbers[currentChecking])
@@ -39,7 +40,7 @@ public class NumPad_Task : Task
                     {
                         currentChecking++;
                     }
-                    else onTaskCompleted.Invoke();
+                    else onTaskCompleted.Invoke(this);
                 }
             }
         }
@@ -60,15 +61,15 @@ public class NumPad_Task : Task
         currentChecking = 0;
     }
 
-    protected override void OnTaskFailed()
+    protected override void OnTaskFailed(Task task)
     {
-        base.OnTaskFailed();
+        base.OnTaskFailed(task);
         resetNumbers();
     }
 
-    protected override void OnTaskCompleted()
+    protected override void OnTaskCompleted(Task task)
     {
-        base.OnTaskCompleted();
+        base.OnTaskCompleted(task);
         resetNumbers();
     }
 
