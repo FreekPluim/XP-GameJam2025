@@ -18,15 +18,8 @@ MonoBehaviour:
 
     Because of how well you did,
     we added two more tasks.'
-  - 'When the light on the task turns on
-
-
-    1: Slider - Slide the handle to the
-    red number
-
-    2. Numpad - repeat the code above.
-
-'
+  - "Currently you have 2 tasks. Complete them when the light below turns on. \n\n1:
+    Slider - Slide the handle to the red number\n2. Numpad - repeat the code above.\n"
   - 'Simple Right!
 
     Goodluck

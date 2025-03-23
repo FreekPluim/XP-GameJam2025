@@ -13,12 +13,14 @@ MonoBehaviour:
   m_Name: Filler
   m_EditorClassIdentifier: 
   dialogue:
-  - 'Goodluck today!
+  - '
+
+    Goodluck today!
 
 
     And Remember:
 
     If you need help,
 
-    You can always
-    call 6'
+    You can
+    always call 6'

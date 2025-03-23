@@ -59,7 +59,6 @@ public class DialogueManager : MonoBehaviour
 
         endOfDialoguePlay.Invoke();
     }
-
     public IEnumerator PlayDialogueSpecific(DialogueSO dialogue)
     {
         dialogueBox.SetActive(true);
@@ -80,7 +79,6 @@ public class DialogueManager : MonoBehaviour
 
         endOfDialoguePlay?.Invoke();
     }
-
     public IEnumerator PlayDialogueText(string text)
     {
         dialogueBox.SetActive(true);

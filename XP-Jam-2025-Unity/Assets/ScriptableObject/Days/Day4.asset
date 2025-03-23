@@ -18,15 +18,8 @@ MonoBehaviour:
 
     Because of how well you did,
     we added one more tasks.'
-  - 'When the light on the task turns on
-
-
-    1: Calculator - give the answer to
-    simple equasions
-
-    2. ... - ...
-
-'
+  - "Currently you have 2 tasks. Complete them when the light below turns on. \n\n1:
+    Calculator - give the answer to simple equasions\n"
   - 'Simple Right!
 
     Goodluck

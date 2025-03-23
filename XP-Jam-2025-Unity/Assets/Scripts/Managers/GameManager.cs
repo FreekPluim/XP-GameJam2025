@@ -67,6 +67,14 @@ public class GameManager : MonoBehaviour
 
         OnQuitPressed();
     }
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            CompleteAllActiveTasks();
+            OnQuitPressed();
+        }
+    }
     void ResetValues()
     {
         for (int i = 0; i < tasks.Count; i++)
@@ -76,6 +84,9 @@ public class GameManager : MonoBehaviour
             tasks[i].onTaskFailed.RemoveListener(OnMistakeMade);
         }
 
+        dialogueManager.StopAllCoroutines();
+        StopAllCoroutines();
+        callSixButton.StopAllCoroutines();
         pentagram.SetActive(false);
         blood.SetActive(false);
 
