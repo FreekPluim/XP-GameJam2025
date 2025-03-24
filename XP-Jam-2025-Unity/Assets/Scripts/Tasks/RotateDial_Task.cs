@@ -24,22 +24,32 @@ public class RotateDial_Task : Task
     {
         base.OnActivateTask();
 
-        chosenPos = Random.Range(0, positions.Count);
+        chosenPos = Random.Range(0, positions.Count - 1);
+        if (chosenPos >= selectedPos)
+        {
+            chosenPos++;
+        }
 
         positions[chosenPos].color = Color.red;
-
     }
+
     protected override void OnTaskCompleted(Task task)
     {
         base.OnTaskCompleted(task);
 
-        positions[chosenPos].color = Color.white;
+        foreach (var pos in positions)
+        {
+            pos.color = Color.white;
+        }
     }
     protected override void OnTaskFailed(Task task)
     {
         base.OnTaskFailed(task);
 
-        positions[chosenPos].color = Color.white;
+        foreach (var pos in positions)
+        {
+            pos.color = Color.white;
+        }
         selectedPos = chosenPos;
 
         switch (chosenPos)

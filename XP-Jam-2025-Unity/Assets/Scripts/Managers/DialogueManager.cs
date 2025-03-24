@@ -20,7 +20,22 @@ public class DialogueManager : MonoBehaviour
 
     public List<DialogueSO> dialogueDays;
 
-    public IEnumerator PlayDialogue(int day)
+    public void PlayDialogue(int day)
+    {
+        StartCoroutine(PlayDialogueCo(day));
+    }
+
+    public void PlayDialogueSpecific(DialogueSO dialogue)
+    {
+        StartCoroutine(PlayDialogueSpecificCo(dialogue));
+    }
+
+    public void PlayDialogueText(string text)
+    {
+        StartCoroutine(PlayDialogueTextCo(text));
+    }
+
+    public IEnumerator PlayDialogueCo(int day)
     {
         dialogueBox.SetActive(true);
         gameplayBox.SetActive(false);
@@ -59,7 +74,7 @@ public class DialogueManager : MonoBehaviour
 
         endOfDialoguePlay.Invoke();
     }
-    public IEnumerator PlayDialogueSpecific(DialogueSO dialogue)
+    public IEnumerator PlayDialogueSpecificCo(DialogueSO dialogue)
     {
         dialogueBox.SetActive(true);
         gameplayBox.SetActive(false);
@@ -79,7 +94,7 @@ public class DialogueManager : MonoBehaviour
 
         endOfDialoguePlay?.Invoke();
     }
-    public IEnumerator PlayDialogueText(string text)
+    public IEnumerator PlayDialogueTextCo(string text)
     {
         dialogueBox.SetActive(true);
         gameplayBox.SetActive(false);

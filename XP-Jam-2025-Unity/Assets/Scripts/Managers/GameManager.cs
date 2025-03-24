@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] DialogueSO killedEnding;
     [SerializeField] DialogueSO firedEnding;
 
-    [SerializeField] GameObject pentagram, blood;
+    public GameObject pentagram, blood;
 
     Coroutine timer;
     Coroutine dayProgress;
@@ -84,6 +84,7 @@ public class GameManager : MonoBehaviour
             tasks[i].onTaskFailed.RemoveListener(OnMistakeMade);
         }
 
+        readyButton.StopAllCoroutines();
         dialogueManager.StopAllCoroutines();
         StopAllCoroutines();
         callSixButton.StopAllCoroutines();
@@ -102,7 +103,7 @@ public class GameManager : MonoBehaviour
     #region Day Started
     void OnDayStarted()
     {
-        StartCoroutine(dialogueManager.PlayDialogue(day - 1));
+        dialogueManager.PlayDialogue(day - 1);
 
         readyButton.text.text = "READY";
         onReadyPressed.AddListener(OnReadyPressed);
@@ -132,7 +133,7 @@ public class GameManager : MonoBehaviour
         CompleteAllActiveTasks();
 
         //Play dialogue for day end
-        StartCoroutine(dialogueManager.PlayDialogueSpecific(perfectDay));
+        dialogueManager.PlayDialogueSpecific(perfectDay);
         dialogueManager.endOfDialoguePlay.AddListener(EndOfDayCallack);
     }
     #endregion
@@ -155,12 +156,14 @@ public class GameManager : MonoBehaviour
             //GAME OVER
             if (calledSixAmount > 0)
             {
-                StartCoroutine(dialogueManager.PlayDialogueSpecific(killedEnding));
+                AudioManager.instance.PlayOneShot("Gun");
+                blood.SetActive(true);
+                dialogueManager.PlayDialogueSpecific(killedEnding);
                 dialogueManager.endOfDialoguePlay.AddListener(OnKilledEnding);
             }
             else
             {
-                StartCoroutine(dialogueManager.PlayDialogueSpecific(firedEnding));
+                dialogueManager.PlayDialogueSpecific(firedEnding);
                 dialogueManager.endOfDialoguePlay.AddListener(OnFiredEnding);
             }
         }
@@ -169,11 +172,11 @@ public class GameManager : MonoBehaviour
             //Play dialogue for bad day end
             if (majorMistakes == 1)
             {
-                StartCoroutine(dialogueManager.PlayDialogueSpecific(badDay));
+                dialogueManager.PlayDialogueSpecific(badDay);
             }
             if (majorMistakes == 2)
             {
-                StartCoroutine(dialogueManager.PlayDialogueSpecific(badDayTwo));
+                dialogueManager.PlayDialogueSpecific(badDayTwo);
             }
             dialogueManager.endOfDialoguePlay.AddListener(EndOfDayCallack);
         }
@@ -327,9 +330,6 @@ public class GameManager : MonoBehaviour
     void OnKilledEnding()
     {
         //Play gun sound
-        AudioManager.instance.PlayOneShot("Gun");
-        blood.SetActive(true);
-
         dialogueManager.endOfDialoguePlay.RemoveListener(OnKilledEnding);
 
         //Go to end screen
@@ -375,9 +375,9 @@ public class GameManager : MonoBehaviour
     void Statistics()
     {
         callSixButton.blur.SetActive(false);
-        StartCoroutine(dialogueManager.PlayDialogueText(
+        dialogueManager.PlayDialogueText(
             "You were " + causeOfDeath + "\n \n" +
-            "You survived until day : " + day.ToString()));
+            "You survived until day : " + day.ToString());
 
         readyButton.text.text = "QUIT";
         dialogueManager.endOfDialoguePlay.AddListener(readyButton.ActivateButton);
@@ -388,7 +388,7 @@ public class GameManager : MonoBehaviour
         onReadyPressed.RemoveAllListeners();
 
         onReset.Invoke();
-        StartCoroutine(dialogueManager.PlayDialogueText("Welcome to:\n\n" + "CALL FOR ACTION! \n\n\n" + "By Singular Salt Grain"));
+        dialogueManager.PlayDialogueText("Welcome to:\n\n" + "CALL FOR ACTION! \n\n\n" + "By Singular Salt Grain");
         readyButton.text.text = "START";
         dialogueManager.endOfDialoguePlay.AddListener(readyButton.ActivateButton);
         onReadyPressed.AddListener(ToNextDay);

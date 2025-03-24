@@ -30,22 +30,11 @@ public class Calculator_Task : Task
         int num1 = Random.Range(2, 10);
         int num2 = Random.Range(1, 10);
 
-        bool plus = Random.Range(0, 1) == 0;
-
-        if (plus)
-        {
-            if (num1 + num2 == 10) num1 -= 1;
-            Calculation.text = $"{num1} + {num2}";
-            answer = num1 + num2;
-        }
-        else
-        {
-            if (num1 + num2 == 10) num1 -= 1;
-            Calculation.text = $"{num1} - {num2}";
-            answer = num1 - num2;
-        }
-
+        if (num1 + num2 == 10) num1 -= 1;
+        Calculation.text = $"{num1} + {num2}";
+        answer = num1 + num2;
     }
+
     protected override void OnTaskCompleted(Task task)
     {
         base.OnTaskCompleted(task);
@@ -89,7 +78,9 @@ public class Calculator_Task : Task
                         }
                         else
                         {
+                            AudioManager.instance.PlayOneShot("Mistake");
                             input = "";
+                            Answer.text = "";
                         }
                     }
                 }

@@ -29,7 +29,7 @@ public class CallSix : MonoBehaviour
                 AudioManager.instance.PlayOneShot("Click");
                 GameManager.instance.softReset();
 
-                StartCoroutine(GameManager.instance.dialogueManager.PlayDialogueSpecific(calls[GameManager.instance.calledSixAmount]));
+                GameManager.instance.dialogueManager.PlayDialogueSpecific(calls[GameManager.instance.calledSixAmount]);
                 GameManager.instance.calledSixAmount++;
                 canCall = false;
 
@@ -45,6 +45,7 @@ public class CallSix : MonoBehaviour
                         GameManager.instance.dialogueManager.endOfDialoguePlay.AddListener(ThirdCall);
                         break;
                     case 4:
+                        GameManager.instance.pentagram.SetActive(true);
                         GameManager.instance.dialogueManager.endOfDialoguePlay?.AddListener(GameManager.instance.OnSacrificedEnding);
                         blur.SetActive(false);
                         break;

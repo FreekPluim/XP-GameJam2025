@@ -16,7 +16,6 @@ public class Dragbar_Task : Task
     public override void Start()
     {
         base.Start();
-        locked = false;
         cam = Camera.main;
     }
 
@@ -65,13 +64,19 @@ public class Dragbar_Task : Task
                 break;
 
         }
-        spaces[chosenDial].color = Color.white;
+        foreach (var space in spaces)
+        {
+            space.color = Color.white;
+        }
     }
 
     protected override void OnTaskFailed(Task task)
     {
         base.OnTaskFailed(task);
-        spaces[chosenDial].color = Color.white;
+        foreach (var space in spaces)
+        {
+            space.color = Color.white;
+        }
     }
 
     RaycastHit hit;
